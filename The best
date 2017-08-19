@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <time.h>
+using namespace std;
+
+long double Fibonacci(int num)
+{
+    if ((num == 1) || (num == 2))
+    {
+        return 1;
+    }
+    // 变量 middle 的定义，节省了大量的运行时间
+    int middle = num / 2;
+    // 通过规律，找到的一种计算 Fibonacci 级数的方法
+    return Fibonacci(middle + 1) * Fibonacci(num - middle) 
+        + Fibonacci(middle) * Fibonacci(num - middle - 1);
+    /*
+    * if (num % 2 ==1)
+    * {
+    *     return Fibonacci(middle + 1) * Fibonacci(middle + 1)
+    *         + Fibonacci(middle) * Fibonacci(middle);
+    * }
+    * return Fibonacci(middle) *(Fibonacci(middle + 1) + Fibonacci(middle - 1));
+    */
+}
+
+int main()
+{
+    clock_t start = clock();
+    cout << Fibonacci(1150) << endl;
+    clock_t finish = clock();
+    double total_Time = ((double)(finish - start) / CLOCKS_PER_SEC) * 1000;
+    cout << "time:" << total_Time << "ms";
+    // time: 4.0 ms
+    return 0;
+}
